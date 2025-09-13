@@ -13,8 +13,9 @@ rest_minutes = round(rest % 60)
 averall_rest = [int(floor(rest / 60)), int(rest_minutes)]
 # 6 is work from the ratio 1:6
 work = [int(6 * floor(rest / 60)), int(6 * rest_minutes)]
-work0 = 120
-rest0 = 20
+work0 = 120  # your single work period in minutes
+rest0 = 20  # your single rest period in minutes
+
 if work[1] > 60:
     work[0] = work[0] + floor(work[1] / 60)
     work[1] = round(work[1] % 60)
@@ -36,12 +37,17 @@ def full_plan(time=time):
         if time >= 140:  # in every part of the loop pick your own sum of single work+rest period
             current_time[0] += (work0 // 60)
             print("Work till", end=" ")
-            print(":".join(str(x) for x in current_time), end=" ")
+            print(current_time[0], end=":")
+            if current_time[1] < 10:
+                print(f"0{current_time[1]}", end=" ")
+            else:
+                print(current_time[1], end=" ")
             current_time[1] = current_time[1] + rest0
             if current_time[1] >= 60:
                 current_time[0] += 1
                 current_time[1] -= 60
             if current_time[1] < 10:
+
                 print(
                     f"Rest till {str(current_time[0])}:0{str(current_time[1])}")
             else:
